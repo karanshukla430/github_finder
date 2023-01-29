@@ -8,10 +8,10 @@ function About() {
         A React app to search GitHub profiles and see profile details. This
         project is part of the React Front To Back.
       </p>
-      <p className='text-lg text-gray-400'>
-        Version:  <span className='text-gray-400'>1.0.0</span>
+      <p className='text-lg text-white-400'>
+        Version:  <span className='text-white-400'>1.0.0</span>
       </p>
-      <p className='text-lg text-gray-400'>
+      <p className='text-lg text-white-400'>
         Layout By: <a className='text-gray-400' href='https://linkedin.com/in/karan-shukla-b38395230
 '> 
            Karan Shukla
