@@ -12,7 +12,7 @@ function About() {
         Version:  <span className='text-white-400'>1.0.0</span>
       </p>
       <p className='text-lg text-white-400'>
-        Layout By: <a className='text-gray-400' href='https://linkedin.com/in/karan-shukla-b38395230
+        Layout By: <a className='text-gray-200' href='https://linkedin.com/in/karan-shukla-b38395230
 '> 
            Karan Shukla
         </a>

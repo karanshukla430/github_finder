@@ -6,12 +6,13 @@ const GithubContext = createContext()
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL
 
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
+// const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN
 
 export const GithubProvider = ({children}) => {
     const initialState = {
         users: [],
         user: {},
+        repos: [],
         loading: false,
     }
 
@@ -25,11 +26,13 @@ export const GithubProvider = ({children}) => {
             q: text,
         })
 
-        const response= await fetch(`${GITHUB_URL}/search/users?${params}`,{
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`,
-            },
-        })
+        const response= await fetch(`${GITHUB_URL}/search/users?${params}`
+        // ,{
+        //     headers: {
+        //         Authorization: `token ${GITHUB_TOKEN}`,
+        //     },
+        // }
+        )
     
         const {items} = await response.json()
     
@@ -42,13 +45,8 @@ export const GithubProvider = ({children}) => {
     //Get Single User
     const getUser = async (login) => {
         setLoading()
-        console.log(login)
-        const response= await fetch(`${GITHUB_URL}/user?${login}`,{
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`, 
-            },
-        })
-        console.log(response)
+       
+        const response= await fetch(`${GITHUB_URL}/users/${login}`)
 
         if( response.status === 404 ){
             window.location = '/notfound'
@@ -57,6 +55,24 @@ export const GithubProvider = ({children}) => {
     
         dispatch({
             type: 'GET_USER',
+            payLoad: data,
+        })
+
+        }
+    }
+
+    const getUserRepos = async (login) => {
+        setLoading()
+       
+        const response= await fetch(`${GITHUB_URL}/users/${login}/repos`)
+
+        if( response.status === 404 ){
+            window.location = '/notfound'
+        } else{
+            const data = await response.json()
+    
+        dispatch({
+            type: 'GET_USER_REPO',
             payLoad: data,
         })
 
@@ -80,9 +96,11 @@ export const GithubProvider = ({children}) => {
             users: state.users,
             loading: state.loading,
             user: state.user,
+            repos: state.repos,
             searchUsers,
             clearUsers,
             getUser,
+            getUserRepos,
         }}
         >
         {children}
