@@ -7,6 +7,9 @@ function UserItem({user: {login, avatar_url}}) {
   // hurray
     // hurray
     // hurray
+  // hurray
+    // hurray
+    // hurray
   return (
     
     <div className='card shadow-md compact side bg-base-100'>
